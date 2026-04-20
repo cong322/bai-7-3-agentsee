@@ -1,0 +1,30 @@
+name: Submit Bai 7.3
+
+on:
+  workflow_dispatch:
+
+jobs:
+  submit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements-bai73.txt
+
+      - name: Show runner region hint
+        run: |
+          echo "Runner: $RUNNER_NAME"
+          echo "OS: $RUNNER_OS"
+
+      - name: Submit and verify bai 7.3
+        env:
+          BAI73_IMAGE: submission-shot-dallas-exact.png
+        run: python submit-bai73.py
